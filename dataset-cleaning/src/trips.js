@@ -44,7 +44,15 @@ const main = async () => {
     (trip) => trip.tripDurationMinutes > 0
   );
 
-  saveToJSON(tripsThatHaveTripDurationGreaterThanZero);
+  const tripsDropMonthAndYear = tripsThatHaveTripDurationGreaterThanZero.map(
+    (trip) => {
+      trip = _.omit(trip, "month");
+      trip = _.omit(trip, "year");
+      return trip;
+    }
+  );
+
+  saveToJSON(tripsDropMonthAndYear);
 };
 
 module.exports = { main };
